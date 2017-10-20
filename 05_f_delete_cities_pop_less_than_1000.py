@@ -1,14 +1,10 @@
 #!/usr/bin/python
-import sys, urllib2, json, pymongo, ast
+import sys, pymongo
 from pymongo import MongoClient
-from bson import json_util
-from bson.json_util import loads,dumps
-import collections
-import urllib
 
 connection = MongoClient('localhost', 27017)
 ###Getting the DATABASE###
-db = connection.test5
+db = connection.test7
 ###Getting the Collection###
 collection = db.zip_code
 #users.find({"age": {"$gt": 20}})
