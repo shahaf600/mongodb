@@ -8,10 +8,10 @@ import urllib
 
 connection = MongoClient('localhost', 27017)
 ###Getting the DATABASE###
-db = connection.test3
+db = connection.test5
 ###Getting the Collection###
 collection = db.zip_code
-posts=db.posts
+zip_code=db.zip_code
 
 myurl = "http://media.mongodb.org/zips.json?_ga=1.14351159.1075586396.1434399762"
 
@@ -30,4 +30,4 @@ with open(file, 'r') as f:
 		print type, jsonWord[type]
 		dict[type] = jsonWord[type]
 	list.append(ast.literal_eval(json.dumps(dict)))
-	result = posts.insert_one(dict)
+	result = zip_code.insert_one(dict)
