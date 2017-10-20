@@ -1,0 +1,45 @@
+#!/usr/bin/python
+import sys, urllib2, json, pymongo, ast
+from pymongo import MongoClient
+from bson import json_util
+from bson.json_util import loads,dumps
+import collections
+
+
+myurl = "http://media.mongodb.org/zips.json?_ga=1.14351159.1075586396.1434399762"
+
+response = urllib2.urlopen(myurl)
+data = response.read()
+
+
+word = ''
+for l in data:
+	if l != '}':
+		word = word + l
+	elif l == '}':
+		break;
+word = word + '}'
+
+jsonWord = json.loads(word)
+dict = {}
+list = []
+for type in jsonWord:
+	print type, jsonWord[type]
+	dict[type] = jsonWord[type]
+list.append(ast.literal_eval(json.dumps(dict)))
+
+
+
+
+connection = MongoClient('localhost', 27017)
+
+###Getting the DATABASE###
+db = connection.test1
+
+###Getting the Collection###
+collection = db.zip_code
+
+posts=db.posts
+result = posts.insert_one(dict)
+
+
